@@ -10,6 +10,7 @@ import org.openedit.WebPageRequest;
 import org.openedit.page.manage.PageManager;
 
 import com.onelogin.saml2.Auth;
+import com.onelogin.saml2.settings.Saml2Settings;
 
 public class SamlModule extends BaseMediaModule
 {
@@ -28,6 +29,8 @@ public class SamlModule extends BaseMediaModule
 			auth.login("/saml/consume.html");
 						
 
+			
+			
 	}
 	
 	
