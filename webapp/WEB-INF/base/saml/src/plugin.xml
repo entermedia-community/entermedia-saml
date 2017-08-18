@@ -1,0 +1,13 @@
+<beans projectname="saml" depends="entermedia">
+
+
+<bean id="SamlModule" class="org.entermediadb.saml.SamlModule" singleton="true">
+<property name="pageManager"><ref bean="pageManager"/></property>
+</bean>
+ 	
+
+
+
+</beans>
+
+ 
