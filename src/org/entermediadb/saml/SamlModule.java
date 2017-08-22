@@ -24,7 +24,8 @@ public class SamlModule extends BaseMediaModule
 		
 	
 		Auth auth = 	new Auth( request, inReq.getResponse());
-		
+		List settings = auth.getSettings().checkSPSettings();
+		Boolean certs = auth.getSettings().checkSPCerts();
 			String x = request.getPathInfo();
 			auth.login("/saml/consume.html");
 						
