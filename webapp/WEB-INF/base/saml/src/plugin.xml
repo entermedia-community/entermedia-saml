@@ -6,6 +6,41 @@
 </bean>
  	
 
+<bean id="autoLoginSaml" class="org.entermediadb.saml.AutoLoginSaml">
+	
+	</bean>
+	
+
+
+	<bean id="Admin" class="org.entermediadb.asset.modules.AdminModule">
+		<property name="sendMailModule">
+			<ref bean="Email" />
+		</property>
+		<property name="cookieEncryption">
+			<ref bean="stringEncryption" />
+		</property>
+		<property name="welcomeFiles">
+			<list>
+				<value>index.html</value>
+				<value>index.htm</value>
+				<value>index.shtml</value>
+				<value>index.jsp</value>
+				<value>index.php</value>
+			</list>
+		</property>
+		<property name="autoLoginProviders">
+			<list>
+				<ref bean="autoLoginWithCookie" />
+				<ref bean="autoLoginByHeader" />
+				<ref bean="autoLoginLti" />
+				<ref bean="autoLoginSaml" />
+				
+			</list>
+		</property>
+	</bean>
+
+
+
 
 
 </beans>
