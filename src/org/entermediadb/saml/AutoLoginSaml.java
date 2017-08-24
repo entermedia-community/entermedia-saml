@@ -29,12 +29,7 @@ public class AutoLoginSaml extends BaseAutoLogin implements AutoLoginProvider
 			HttpServletRequest request = inReq.getRequest();
 			
 			Auth auth = 	new Auth( request, inReq.getResponse());
-			List settings = auth.getSettings().checkSPSettings();
-			Boolean certs = auth.getSettings().checkSPCerts();
-			
-			Saml2Settings settings3 = auth.getSettings();
-			String metadata = settings3.getSPMetadata();
-			List<String> errors = Saml2Settings.validateMetadata(metadata);
+		
 			
 				auth.login("/saml/consume.html");
 			
