@@ -9,7 +9,7 @@ importPackage( Packages.org.entermediadb.modules.update );
 
 var name = "extension-saml";
 
-var war = "http://dev.entermediasoftware.com/jenkins/job/@BRANCH@_" + name + "/lastSuccessfulBuild/artifact/deploy/" + name + ".zip";
+var war = "http://dev.entermediasoftware.com/jenkins/job/@BRANCH@" + name + "/lastSuccessfulBuild/artifact/deploy/" + name + ".zip";
 
 var root = moduleManager.getBean("root").getAbsolutePath();
 var web = root + "/WEB-INF";
