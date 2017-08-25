@@ -4,12 +4,15 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/entermedia-core"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/entermedia-server"/>
-	<classpathentry exported="true" kind="lib" path="lib/java-saml-2.1.0.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/java-saml-core-2.1.0.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/stax-api-1.0-2.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/stax2-api-3.1.4.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/woodstox-core-asl-4.4.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/xmlsec-2.0.7.jar"/>
+	<classpathentry kind="lib" path="lib/compile/servlet-api.jar"/>
+	<classpathentry kind="lib" path="lib/java-saml-2.1.0.jar"/>
+	<classpathentry kind="lib" path="lib/java-saml-core-2.1.0.jar"/>
+	<classpathentry kind="lib" path="lib/joda-time-2.9.4.jar"/>
 	<classpathentry kind="lib" path="lib/onelogin-java-sdk-1.0.0.jar"/>
+	<classpathentry kind="lib" path="lib/slf4j-api-1.7.12.jar"/>
+	<classpathentry kind="lib" path="lib/stax-api-1.0-2.jar"/>
+	<classpathentry kind="lib" path="lib/stax2-api-3.1.4.jar"/>
+	<classpathentry kind="lib" path="lib/woodstox-core-asl-4.4.1.jar"/>
+	<classpathentry kind="lib" path="lib/xmlsec-2.0.7.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

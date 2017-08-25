@@ -1,7 +1,5 @@
 package org.entermediadb.saml;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.logging.Log;
@@ -11,10 +9,8 @@ import org.entermediadb.authenticate.AutoLoginResult;
 import org.entermediadb.authenticate.BaseAutoLogin;
 import org.openedit.OpenEditException;
 import org.openedit.WebPageRequest;
-import org.openedit.util.StringEncryption;
 
 import com.onelogin.saml2.Auth;
-import com.onelogin.saml2.settings.Saml2Settings;
 
 public class AutoLoginSaml extends BaseAutoLogin implements AutoLoginProvider
 {
