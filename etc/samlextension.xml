@@ -1,6 +1,6 @@
 <plugins>
 	<plugin id="saml-extension" title="AWS Extension" currentversion="9"
-		installscript="http://dev.entermediasoftware.com/jenkins/view/Dev/job/@BRANCH@_extension-saml/lastSuccessfulBuild/artifact/deploy/install.js"
+		installscript="http://dev.entermediasoftware.com/jenkins/view/Dev/job/@BRANCH@extension-saml/lastSuccessfulBuild/artifact/deploy/install.js"
 		depends="entermedia-server">
 		<description>AWS Installer</description>
 		<currentversionnotes></currentversionnotes>
