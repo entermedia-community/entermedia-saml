@@ -185,7 +185,7 @@
 					      <filter token="BRANCH" value="${branch}"/>
 				    </filterset>
 			</copy>
-		<copy file="${etc}/awsextension-full.xml" overwrite="true"
+		<copy file="${etc}/samlextension-full.xml" overwrite="true"
 						        tofile="${deployDir}/samlextension-full.xml">
 						 <filterset>
 						      <filter token="BRANCH" value="${branch}"/>
