@@ -69,6 +69,12 @@ public class SamlModule extends BaseMediaModule
 
 	public void startAuthentication(WebPageRequest inReq) throws Exception{
 		HttpServletRequest request = inReq.getRequest();
+		String appid = inReq.findValue("applicationid");
+		inReq.getRequest().getSession().setAttribute("targetapp", appid);
+		String catalogid = inReq.findValue("catalogid");
+		inReq.getRequest().getSession().setAttribute("catalogid", appid);
+		log.info("Checking SAML authentication");
+		
 		
 		Auth auth = 	new Auth( request, inReq.getResponse());
 		List settings = auth.getSettings().checkSPSettings();
