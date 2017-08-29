@@ -27,11 +27,11 @@ public class AutoLoginSaml extends BaseAutoLogin implements AutoLoginProvider
 			inReq.getRequest().getSession().setAttribute("targetapp", appid);
 			String catalogid = inReq.findValue("catalogid");
 			inReq.getRequest().getSession().setAttribute("catalogid", appid);
-			
+			log.info("Checking SAML authentication");
 			Auth auth = 	new Auth( request, inReq.getResponse());
 			auth.login("/saml/consume.html");
 			
-			
+		
 			
 		}
 		catch (Exception e)
