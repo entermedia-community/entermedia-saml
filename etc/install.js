@@ -45,7 +45,7 @@ files.copyFileByMatch( tmp + "/lib/*.jar", web + "/lib/");
 
 
 files.deleteMatch( web + "/WEB-INF/base/saml/")
-files.copyFileByMatch( tmp + "/base/saml/", root + "/WEB-INF/base/saml/*");
+files.copyFileByMatch( tmp + "/base/saml/", root + "/WEB-INF/base/saml/");
 
 
 
