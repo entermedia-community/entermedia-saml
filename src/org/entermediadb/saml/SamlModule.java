@@ -98,6 +98,8 @@ public class SamlModule extends BaseMediaModule
 		
 		Auth auth = 	new Auth( inReq.getRequest(), inReq.getResponse());
 		auth.processResponse();
+		log.info("Checking SAML response");
+
 		if(auth.isAuthenticated()){
 			Map<String, List<String>> attributes = auth.getAttributes();
 			String metadata = auth.getSettings().getSPMetadata();
@@ -170,7 +172,8 @@ public class SamlModule extends BaseMediaModule
 			}
 			
 		} else{
-			
+			log.info("Couldn't authenticate: ");
+
 			log.info(auth.getLastErrorReason());
 
 		}
