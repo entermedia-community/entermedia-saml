@@ -3,6 +3,9 @@
 
 <bean id="SamlModule" class="org.entermediadb.saml.SamlModule" singleton="true">
 <property name="pageManager"><ref bean="pageManager"/></property>
+<property name="userManager"><ref bean="userManager"/></property>
+<property name="eventManager"><ref bean="eventManager"/></property>
+
 </bean>
  	
 
