@@ -68,6 +68,7 @@ public class SamlModule extends BaseMediaModule
 	private static final Log log = LogFactory.getLog(SamlModule.class);
 
 	public void startAuthentication(WebPageRequest inReq) throws Exception{
+
 		HttpServletRequest request = inReq.getRequest();
 		String appid = inReq.findValue("applicationid");
 		inReq.getRequest().getSession().setAttribute("targetapp", appid);
@@ -81,16 +82,36 @@ public class SamlModule extends BaseMediaModule
 		Boolean certs = auth.getSettings().checkSPCerts();
 		Saml2Settings settings3 = auth.getSettings();
 		String metadata = settings3.getSPMetadata();
+		
 		List<String> errors = Saml2Settings.validateMetadata(metadata);
 		
 		String x = request.getPathInfo();
 		auth.login("/saml/consume.html");
-		inReq.setCancelActions(true);
-		inReq.setHasRedirected(true);
 		
 			
 			
 	}
+	
+	public void loadMetadata(WebPageRequest inReq) throws Exception{
+
+		HttpServletRequest request = inReq.getRequest();
+		String appid = inReq.findValue("applicationid");
+		inReq.getRequest().getSession().setAttribute("targetapp", appid);
+		String catalogid = inReq.findValue("catalogid");
+		inReq.getRequest().getSession().setAttribute("catalogid", appid);
+		log.info("Checking SAML authentication");
+		
+		
+		Auth auth = 	new Auth( request, inReq.getResponse());
+		Saml2Settings settings3 = auth.getSettings();
+		String metadata = settings3.getSPMetadata();
+		
+		inReq.putPageValue("metadata", metadata);
+			
+			
+	}
+	
+	
 	
 	
 	public void processResponse(WebPageRequest inReq)  throws Exception{

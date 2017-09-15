@@ -1,3 +1,4 @@
 <page>
 
-<path-action name="SamlModule.startAuthen
+<path-action name="SamlModule.loadMetadata"/>
+</page>
