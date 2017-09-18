@@ -130,9 +130,11 @@ public class SamlModule extends BaseMediaModule
 			String targetapp = (String) inReq.getSessionValue("targetapp");
 			String targetcatalog = (String) inReq.getSessionValue("targetcatalog");
 			if(targetcatalog == null){
-				targetcatalog="system";
+				targetcatalog = inReq.findValue("targetcatalog");
 			}
-			
+			if(targetcatalog == null){
+				targetcatalog = "system";
+			}
 			
 		//	MediaArchive archive = getMediaArchive(inReq);
 			UserSearcher searcher = (UserSearcher) getSearcherManager().getSearcher(targetcatalog,"user");
@@ -142,7 +144,7 @@ public class SamlModule extends BaseMediaModule
 				emailattribute = "User.email";
 			}
 			if(attributes.get(emailattribute) == null){
-				throw new OpenEditException("Couldn't find email to match in attributes.  Attributes available are " + attributes + " Please add saml-email-attribute to catalogsettings");
+				throw new OpenEditException("Couldn't find email to match in attributes.  Attributes available are " + attributes + " Please add saml-email-attribute to catalogsettings.  Catalog was: " + targetcatalog);
 			}
 			String email = attributes.get(emailattribute).get(0);
 			
