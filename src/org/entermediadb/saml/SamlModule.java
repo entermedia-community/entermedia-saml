@@ -123,6 +123,8 @@ public class SamlModule extends BaseMediaModule
 
 		if(auth.isAuthenticated()){
 			Map<String, List<String>> attributes = auth.getAttributes();
+			log.info(attributes);
+			log.info(attributes.keySet());
 			String metadata = auth.getSettings().getSPMetadata();
 			String targetapp = (String) inReq.getSessionValue("targetapp");
 			String targetcatalog = (String) inReq.getSessionValue("targetcatalog");
