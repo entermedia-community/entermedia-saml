@@ -136,6 +136,13 @@ public class SamlModule extends BaseMediaModule
 				targetcatalog = "system";
 			}
 			
+			
+			
+			if(targetapp == null){
+				targetcatalog = inReq.findValue("targetapp");
+			}
+			
+			
 		//	MediaArchive archive = getMediaArchive(inReq);
 			UserSearcher searcher = (UserSearcher) getSearcherManager().getSearcher(targetcatalog,"user");
 			
@@ -148,26 +155,27 @@ public class SamlModule extends BaseMediaModule
 			}
 			String email = attributes.get(emailattribute).get(0);
 			
+			//TODO - map these to property detail lookups.
 			
-			String firstname = null;
-			String lastname = null;
-
-			if(attributes.get("User.FirstName").size() > 0){
-				firstname = attributes.get("User.FirstName").get(0);
-			}
-
-			if(attributes.get("User.LastName").size() > 0){
-				lastname = attributes.get("User.LastName").get(0);
-			}
-			
+//			String firstname = null;
+//			String lastname = null;
+//
+//			if(attributes.get("User.FirstName").size() > 0){
+//				firstname = attributes.get("User.FirstName").get(0);
+//			}
+//
+//			if(attributes.get("User.LastName").size() > 0){
+//				lastname = attributes.get("User.LastName").get(0);
+//			}
+//			
 			
 			
 			User target = searcher.getUserByEmail(email);
 			if (target == null)
 			{
 				target = (User) searcher.createNewData();
-				target.setFirstName(firstname);
-				target.setLastName(lastname);
+//				target.setFirstName(firstname);
+//				target.setLastName(lastname);
 				target.setEmail(email);
 				target.setEnabled(true);
 				searcher.saveData(target, null);			
