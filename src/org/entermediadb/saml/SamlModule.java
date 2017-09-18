@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.entermediadb.asset.modules.BaseMediaModule;
+import org.openedit.OpenEditException;
 import org.openedit.WebPageRequest;
 import org.openedit.data.SearcherManager;
 import org.openedit.event.EventManager;
@@ -131,13 +132,21 @@ public class SamlModule extends BaseMediaModule
 			if(targetcatalog == null){
 				targetcatalog="system";
 			}
-			log.info(metadata);
 			
 			
 		//	MediaArchive archive = getMediaArchive(inReq);
 			UserSearcher searcher = (UserSearcher) getSearcherManager().getSearcher(targetcatalog,"user");
 			
-			String email = attributes.get("User.email").get(0);
+			String emailattribute = getMediaArchive(targetcatalog).getCatalogSettingValue("saml-email-attribute");
+			if(emailattribute == null){
+				emailattribute = "User.email";
+			}
+			if(attributes.get(emailattribute) == null){
+				throw new OpenEditException("Couldn't find email to match in attributes.  Attributes available are " + attributes + " Please add saml-email-attribute to catalogsettings");
+			}
+			String email = attributes.get(emailattribute).get(0);
+			
+			
 			String firstname = null;
 			String lastname = null;
 
