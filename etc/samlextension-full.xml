@@ -1,17 +1,17 @@
 <plugins>
 	
-	<plugin id="entermedia-server" title="EnterMedia Server" currentversion="7.282" installscript="http://dev.entermediasoftware.com/jenkins/job/@BRANCH@_entermedia-server/lastSuccessfulBuild/artifact/deploy/install.js" depends="">
+	<plugin id="entermedia-server" title="EnterMedia Server" currentversion="7.282" installscript="http://dev.entermediasoftware.com/jenkins/job/@BRANCH@entermedia-server/lastSuccessfulBuild/artifact/deploy/install.js" depends="">
 		<description>Base platforms</description>
 		<currentversionnotes>
 	</currentversionnotes>
 	</plugin>
 
-	<plugin id="extension-openedit" title="OpenEdit CMS" currentversion="1.51" installscript="http://dev.entermediasoftware.com/jenkins/job/@BRANCH@_extension-openedit/lastSuccessfulBuild/artifact/deploy/install.js" depends="entermedia-server">
+	<plugin id="extension-openedit" title="OpenEdit CMS" currentversion="1.51" installscript="http://dev.entermediasoftware.com/jenkins/job/@BRANCH@extension-openedit/lastSuccessfulBuild/artifact/deploy/install.js" depends="entermedia-server">
 		<description>Online HTML editor</description>
 		<currentversionnotes></currentversionnotes>
 	</plugin>
 
-    <plugin id="app-emshare" title="EMShare" currentversion="8" installscript="http://dev.entermediasoftware.com/jenkins/job/@BRANCH@_app-emshare/lastSuccessfulBuild/artifact/deploy/install.js" depends="entermedia-server">
+    <plugin id="app-emshare" title="EMShare" currentversion="8" installscript="http://dev.entermediasoftware.com/jenkins/job/@BRANCH@app-emshare/lastSuccessfulBuild/artifact/deploy/install.js" depends="entermedia-server">
             <description>EMShare</description>
             <currentversionnotes></currentversionnotes>
     </plugin>
