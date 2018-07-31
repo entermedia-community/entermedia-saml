@@ -74,7 +74,7 @@ public class SamlModule extends BaseMediaModule
 		String appid = inReq.findValue("applicationid");
 		inReq.getRequest().getSession().setAttribute("targetapp", appid);
 		String catalogid = inReq.findValue("catalogid");
-		inReq.getRequest().getSession().setAttribute("catalogid", appid);
+		inReq.getRequest().getSession().setAttribute("catalogid", catalogid);
 		log.info("Checking SAML authentication");
 		
 		
@@ -146,7 +146,7 @@ public class SamlModule extends BaseMediaModule
 			
 			
 			if(targetapp == null){
-				targetcatalog = inReq.findValue("targetapp");
+				targetapp = inReq.findValue("targetapp");
 			}
 			
 			
