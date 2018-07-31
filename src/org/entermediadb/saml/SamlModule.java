@@ -126,6 +126,11 @@ public class SamlModule extends BaseMediaModule
 			Map<String, List<String>> attributes = auth.getAttributes();
 			log.info(attributes);
 			log.info(attributes.keySet());
+			auth.getNameId();
+			
+			log.info(auth.getLastResponseXML());
+			
+			
 			String metadata = auth.getSettings().getSPMetadata();
 			String targetapp = (String) inReq.getSessionValue("targetapp");
 			String targetcatalog = (String) inReq.getSessionValue("targetcatalog");
@@ -148,7 +153,7 @@ public class SamlModule extends BaseMediaModule
 			
 			String emailattribute = getMediaArchive(targetcatalog).getCatalogSettingValue("saml-email-attribute");
 			if(emailattribute == null){
-				emailattribute = "User.email";
+				emailattribute = "User.email";  //ADFS
 			}
 			if(attributes.get(emailattribute) == null){
 				throw new OpenEditException("Couldn't find email to match in attributes.  Attributes available are " + attributes + " Please add saml-email-attribute to catalogsettings.  Catalog was: " + targetcatalog);
