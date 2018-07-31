@@ -128,8 +128,10 @@ public class SamlModule extends BaseMediaModule
 			log.info(attributes.keySet());
 			auth.getNameId();
 			
-			log.info(auth.getLastResponseXML());
+			log.info("XML: " + auth.getLastResponseXML());
 			
+			
+			log.info(auth.getAttributesName());
 			
 			String metadata = auth.getSettings().getSPMetadata();
 			String targetapp = (String) inReq.getSessionValue("targetapp");
