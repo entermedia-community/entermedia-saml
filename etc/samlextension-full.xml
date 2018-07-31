@@ -22,7 +22,7 @@
 
 	
 	<plugin id="saml-extension" title="SAML Extension" currentversion="9"
-		installscript="http://dev.entermediasoftware.com/jenkins/view/Dev/job/@BRANCH@_extension-saml/lastSuccessfulBuild/artifact/deploy/install.js"
+		installscript="http://dev.entermediasoftware.com/jenkins/view/Dev/job/@BRANCH@extension-saml/lastSuccessfulBuild/artifact/deploy/install.js"
 		depends="entermedia-server">
 		<description>SAML Authentication Installer</description>
 		<currentversionnotes></currentversionnotes>
