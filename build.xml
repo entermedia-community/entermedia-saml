@@ -179,6 +179,12 @@
 				 		      <filter token="BRANCH" value="${branch}"/>
 				 		    </filterset>
 		 	</copy>	
+			<copy overwrite="true"  file="${etc}/install.xml" 
+				    tofile="${deployDir}/install.xml">
+			 		 <filterset>
+			 		      <filter token="BRANCH" value="${branch}"/>
+			 		 </filterset>
+			</copy>	
 		 	<copy file="${etc}/samlextension.xml" overwrite="true"
 					        tofile="${deployDir}/samlextension.xml">
 					 <filterset>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="entermedia-saml" basedir="." default="default" >
+
+	<property name="dockerwebapp" location="/opt/entermediadb/webapp"/>
+ 	<property name="dockerlib" location="${dockerwebapp}/WEB-INF/lib"/>
+	
+  	<target name="default" depends="extend"/>
+  
+	<target name="extend">
+	  	<echo>Reinstall SAML plugin(s)</echo>
+	 	 <delete failonerror="false">
+	       <fileset dir="${dockerwebapp}/WEB-INF/base/saml/"/>
+	     </delete>
+	     <copy todir="${dockerwebapp}/WEB-INF/base/saml" preservelastmodified="true">
+	       <fileset dir="${basedir}/base/saml"/>
+	     </copy>
+	  	
+	    <delete>
+	      <fileset file="${dockerlib}/em9_extension-saml-**.jar"/>
+	      <fileset file="${dockerlib}/onelogin**.jar"/>
+	      <fileset file="${dockerlib}/java-saml**.jar"/>
+	      <fileset file="${dockerlib}/stax**.jar"/>
+	      <fileset file="${dockerlib}/woodstok**.jar"/>
+	    </delete>
+	  	
+	    <copy todir="${dockerlib}" overwrite="false" preservelastmodified="true">
+	      <fileset file="${basedir}/lib/**.jar"/>
+	    </copy>
+	</target>
+</project>
