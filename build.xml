@@ -3,7 +3,7 @@
 
   <target name="default" depends="clean,  update-dependencies, compile,  jar, javadoc, zip, publish"/>
   <target name="dependency" depends="default"/>
-   
+
     <property name="appname" value="${ant.project.name}"/>
     <property name="org" value="OpenEdit, Inc."/>
     <property name="src" location="${basedir}/src"/>
@@ -12,27 +12,27 @@
     <property name="etc" location="${basedir}/etc"/>
     <property name="build" location="${basedir}/build"/>
 	<property name="compiled" location="${basedir}/build/compiled"/>
-	
+
     <property name="wardir" location="${build}/wartmp"/>
     <property name="webapp" location="${basedir}/webapp"/>
 	<property name="webinf" location="${webapp}/WEB-INF"/>
 	<property name="branch" value="em9_" />
 				<property name="majorversion" value="9" />
 
-	<!-- 
+	<!--
 		========================================================================
 		Anthill build server properties.  These properties will be passed in
 		by anthill when this script is executed on the build server.
-		
+
 			- "version" is set by the version adapter
 			- "deployDir" is set by anthill.publish.dir
 		========================================================================
-	--> 
+	-->
 	<property environment="env" />
-	
+
 	<property name="version"  value="${majorversion}.${env.BUILD_NUMBER}"/>
   	<property name="deployDir" location="deploy"/>
-  	
+
   	<!-- A convenience variable for documentation output -->
   	<property name="versionDir" location="${deployDir}/${version}"/>
   	<property name="versionedApp" value="${appname}-${version}"/>
@@ -41,28 +41,28 @@
      <delete dir="${build}"/>
   </target>
 
-	<target name="source"> 
-		<mkdir dir="${deployDir}/builds/" />	
+	<target name="source">
+		<mkdir dir="${deployDir}/builds/" />
 	  	<zip destfile="${deployDir}/builds/${appname}-${version}-src.zip"  basedir="." excludes="deploy/**, build/**" />
 	  </target>
-	
+
 	<target name="update-dependencies" depends="clean">
 	    <mkdir dir="${build}"/>
 	    <mkdir dir="${wardir}/WEB-INF/" />
 		<get dest="${build}/install.xml" src="http://dev.entermediasoftware.com/jenkins/job/${branch}entermedia-server/lastSuccessfulBuild/artifact/deploy/install.xml"/>
-			<ant antfile="${build}/install.xml" inheritAll="false" dir="${wardir}/WEB-INF/" target="default"/> 
+			<ant antfile="${build}/install.xml" inheritAll="false" dir="${wardir}/WEB-INF/" target="default"/>
 
 	</target>
-  
+
   <target name="compile" depends="clean">
     <mkdir dir="${compiled}"/>
-  
+
  	<copy todir="${compiled}">
 		<fileset dir="${src}">
 		  <include name="*.xml"/>
 		</fileset>
 	</copy>
-  
+
     <javac debug="true" destdir="${compiled}" srcdir="${src}" source="1.7" target="1.7">
       <classpath>
         <fileset dir="${lib}">
@@ -76,12 +76,12 @@
       <include name="**"/>
     </javac>
   </target>
-  
-  	<!-- 
+
+  	<!--
 		========================================================================
 		Jar classes for the main app, excluding unit tests.
 		========================================================================
-	-->	  
+	-->
 	<target name="jar" depends="compile">
 		<mkdir dir="${deployDir}/builds/"/>
 		<jar jarfile="${deployDir}/builds/${branch}${appname}-${version}.jar" basedir="${compiled}" >
@@ -94,24 +94,24 @@
 		    </manifest>
 		</jar>
   </target>
-    
-    
-	
+
+
+
 	<target name="zip" depends="compile">
 		<mkdir dir="${deployDir}/builds/"/>
-		<zip destfile="${deployDir}/builds/${appname}.zip" >			
+		<zip destfile="${deployDir}/builds/${appname}.zip" >
 			<zipfileset dir="${lib}" prefix="lib" excludes="compile/**"/>
-			
+
 			<zipfileset dir="${deployDir}/builds/" includes="${branch}${appname}-${version}.jar" prefix="lib"/>
 			<zipfileset dir="${webapp}/WEB-INF/base/saml" prefix="base/saml" />
-
+      <zipfileset dir="${etc}" includes="install.xml"/>		
 		</zip>
   </target>
-	    
-	
-	
+
+
+
   <target name="junit">
-  	
+
     <javac debug="true" destdir="${compiled}" srcdir="${testsrc}" source="1.7" target="1.7">
       <classpath>
         <fileset dir="${lib}">
@@ -121,12 +121,12 @@
         <fileset dir="${wardir}/WEB-INF/lib/">
             <include name="*.jar"/>
          </fileset>
-      
+
       </classpath>
       <include name="**"/>
     </javac>
 
-  	<mkdir dir="${deployDir}/junit"/>	
+  	<mkdir dir="${deployDir}/junit"/>
   	<junit haltonfailure="true" showoutput="true" printsummary="true" fork="true" maxmemory="256m">
   		<sysproperty key="oe.root.path" value="${basedir}/resources/test"/>
   	  <classpath>
@@ -145,7 +145,7 @@
   		</test>
   	</junit>
   </target>
-  
+
     <target name="javadoc">
     	<delete dir="${deployDir}/javadoc"/>
     	<mkdir dir="${deployDir}/javadoc" />
@@ -154,7 +154,7 @@
             noindex="false" splitindex="false" author="true" use="false" verbose="false"
             version="true" nodeprecatedlist="false" nodeprecated="false"
             doctitle="OpenEdit">
-          
+
               <packageset dir="${src}" defaultexcludes="yes">
 			      <exclude name="com/**/*Test*"/>
 			      <exclude name="org/**/*Test*"/>
@@ -167,24 +167,18 @@
 
 		</javadoc>
     </target>
-	
+
 	<target name="publish" depends="javadoc, zip">
-		  
+
 			<!-- publish results to anthill -->
 		 	<copy file="${deployDir}/builds/extension-saml.zip" overwrite="true"
 		        tofile="${deployDir}/extension-saml.zip"/>
-			<copy overwrite="true"  file="${etc}/install.js" 
+			<copy overwrite="true"  file="${etc}/install.js"
 				    tofile="${deployDir}/install.js">
 				 		 <filterset>
 				 		      <filter token="BRANCH" value="${branch}"/>
 				 		    </filterset>
-		 	</copy>	
-			<copy overwrite="true"  file="${etc}/install.xml" 
-				    tofile="${deployDir}/install.xml">
-			 		 <filterset>
-			 		      <filter token="BRANCH" value="${branch}"/>
-			 		 </filterset>
-			</copy>	
+		 	</copy>
 		 	<copy file="${etc}/samlextension.xml" overwrite="true"
 					        tofile="${deployDir}/samlextension.xml">
 					 <filterset>
@@ -198,10 +192,10 @@
 					    </filterset>
 				</copy>
 
-			
+
 		</target>
-	  
-  
-  
- 
+
+
+
+
 </project>
